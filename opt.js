@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { EOL } = require('os');
 
 //async function isTrueFalse() {
 //  try {
@@ -13,8 +14,28 @@ const fs = require('fs');
 
 class IsFalseTrue {
   questionsTrueFalse() {
-    const file = fs.readFileSync(`${__dirname}/topics/isTrueAnswer.txt`, 'utf-8');
-    return file.split('\n').map((el) => el);
+    function arrayFind() {
+      const file = fs.readFileSync(`${__dirname}/topics/isTrueAnswer.txt`, 'utf-8').split(',');
+      const arrQ = [];
+      for (let i = 0; i < file.length; i += 1) {
+        arrQ.push(file[i]);
+      }
+      return arrQ;
+    }
+    const arr1 = arrayFind();
+    console.log(arr1);
+
+    function convertArr(arr, cols = 3) {
+      let resultArr = [];
+      while (arr.length > 0) {
+        resultArr.push(arr.slice(0, cols));
+        arr.splice(0, cols);
+      }
+      return resultArr;
+    }
+
+    const arr2 = convertArr(arr1, 3);
+    return arr2;
   }
 }
 
